@@ -41,4 +41,48 @@ st.set_page_config(
 
 # Initialize logging
 setup_logging()
-log_info("Quill application starting up") 
+log_info("Quill application starting up")
+
+def main():
+    """Main application function."""
+    try:
+        # Load custom CSS
+        load_custom_css()
+        load_header_css()
+        load_sidebar_css()
+        load_font_imports()
+        
+        # Initialize state manager
+        state_manager = StateManager()
+        
+        # Render header
+        st.title("📊 " + config.domain.app_title)
+        st.markdown("---")
+        
+        # Render stepper
+        render_stepper(state_manager.get_current_step())
+        
+        # Render main content based on current step
+        current_step = state_manager.get_current_step()
+        
+        if current_step == ProcessingStep.UPLOAD:
+            render_upload_page(state_manager)
+        elif current_step == ProcessingStep.EXTRACT:
+            render_extract_page(state_manager)
+        elif current_step == ProcessingStep.GENERATE:
+            render_generate_page(state_manager)
+        elif current_step == ProcessingStep.DOWNLOAD:
+            render_download_page(state_manager)
+        else:
+            render_upload_page(state_manager)
+        
+        # Render ad-hoc questions page
+        render_adhoc_questions_page(state_manager)
+        
+    except Exception as e:
+        log_error(f"Error in main application: {str(e)}")
+        st.error(f"An error occurred: {str(e)}")
+        st.info("Please refresh the page and try again.")
+
+if __name__ == "__main__":
+    main() 
