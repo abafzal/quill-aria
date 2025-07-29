@@ -81,6 +81,41 @@ def load_sidebar_css() -> None:
         border: none;
         background-color: #e3f2fd;
     }
+    
+    /* Improve sidebar selectbox readability */
+    [data-testid="stSidebar"] [data-testid="stSelectbox"] {
+        background-color: #ffffff;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+    }
+    
+    [data-testid="stSidebar"] [data-testid="stSelectbox"] label {
+        color: #374151 !important;
+        font-weight: 500;
+        font-size: 0.875rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    [data-testid="stSidebar"] [data-testid="stSelectbox"] select {
+        background-color: #ffffff !important;
+        color: #1f2937 !important;
+        border: 1px solid #d1d5db !important;
+        border-radius: 4px !important;
+        padding: 0.5rem !important;
+        font-size: 0.875rem !important;
+    }
+    
+    [data-testid="stSidebar"] [data-testid="stSelectbox"] select option {
+        background-color: #ffffff !important;
+        color: #1f2937 !important;
+        padding: 0.5rem !important;
+    }
+    
+    [data-testid="stSidebar"] [data-testid="stSelectbox"] select:focus {
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
+        outline: none !important;
+    }
     </style>
     """
     st.markdown(sidebar_css, unsafe_allow_html=True)
