@@ -190,6 +190,119 @@ def load_sidebar_css() -> None:
         color: #1f2937 !important;
     }
     
+    /* Fix dropdown and select elements specifically */
+    [data-testid="stSelectbox"] {
+        background-color: #ffffff !important;
+        border: 1px solid #d1d5db !important;
+        border-radius: 4px !important;
+    }
+    
+    [data-testid="stSelectbox"] label {
+        color: #374151 !important;
+        font-weight: 500 !important;
+        font-size: 0.875rem !important;
+        margin-bottom: 0.25rem !important;
+    }
+    
+    [data-testid="stSelectbox"] select {
+        background-color: #ffffff !important;
+        color: #1f2937 !important;
+        border: 1px solid #d1d5db !important;
+        border-radius: 4px !important;
+        padding: 0.5rem !important;
+        font-size: 0.875rem !important;
+    }
+    
+    [data-testid="stSelectbox"] select option {
+        background-color: #ffffff !important;
+        color: #1f2937 !important;
+        padding: 0.5rem !important;
+    }
+    
+    /* Fix extracted questions page specifically */
+    [data-testid="stDataFrame"] {
+        background-color: #ffffff !important;
+        color: #1f2937 !important;
+    }
+    
+    [data-testid="stDataFrame"] th {
+        background-color: #f3f4f6 !important;
+        color: #374151 !important;
+        font-weight: 600 !important;
+    }
+    
+    [data-testid="stDataFrame"] td {
+        background-color: #ffffff !important;
+        color: #1f2937 !important;
+        border: 1px solid #e5e7eb !important;
+    }
+    
+    [data-testid="stDataFrame"] tr:nth-child(even) td {
+        background-color: #f9fafb !important;
+    }
+    
+    /* Fix any remaining low contrast text */
+    div[data-testid="stMarkdownContainer"] {
+        color: #1f2937 !important;
+    }
+    
+    div[data-testid="stMarkdownContainer"] p {
+        color: #1f2937 !important;
+    }
+    
+    div[data-testid="stMarkdownContainer"] h1,
+    div[data-testid="stMarkdownContainer"] h2,
+    div[data-testid="stMarkdownContainer"] h3,
+    div[data-testid="stMarkdownContainer"] h4,
+    div[data-testid="stMarkdownContainer"] h5,
+    div[data-testid="stMarkdownContainer"] h6 {
+        color: #111827 !important;
+    }
+    
+    /* Fix any Streamlit components that might have low contrast */
+    [data-testid="stExpander"] {
+        background-color: #ffffff !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 6px !important;
+    }
+    
+    [data-testid="stExpander"] [data-testid="stMarkdownContainer"] {
+        color: #1f2937 !important;
+    }
+    
+    /* Fix any div elements with custom styling */
+    div[style*="color"] {
+        color: #1f2937 !important;
+    }
+    
+    /* Override any inline styles that might cause low contrast */
+    [style*="color: #666"],
+    [style*="color: #888"],
+    [style*="color: #555"],
+    [style*="color: #666666"],
+    [style*="color: #888888"],
+    [style*="color: #555555"] {
+        color: #1f2937 !important;
+    }
+    
+    /* Force override any div with low contrast colors */
+    div[style*="color: #666"],
+    div[style*="color: #888"],
+    div[style*="color: #555"],
+    div[style*="color: #666666"],
+    div[style*="color: #888888"],
+    div[style*="color: #555555"] {
+        color: #1f2937 !important;
+    }
+    
+    /* Override any remaining low contrast text with !important */
+    *[style*="color: #666"] { color: #1f2937 !important; }
+    *[style*="color: #888"] { color: #1f2937 !important; }
+    *[style*="color: #555"] { color: #1f2937 !important; }
+    *[style*="color: #666666"] { color: #1f2937 !important; }
+    *[style*="color: #888888"] { color: #1f2937 !important; }
+    *[style*="color: #555555"] { color: #1f2937 !important; }
+    
     /* Fix error and success messages */
     .stAlert {
         border: 1px solid !important;
