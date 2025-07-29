@@ -395,24 +395,24 @@ def _get_main_css() -> str:
     
     /* AgGrid custom styling */
     .ag-theme-streamlit {
-        --ag-background-color: white !important;
+        --ag-background-color: #ffffff !important;
         --ag-foreground-color: #333333 !important;
-        --ag-header-background-color: #f0f0f0 !important;
-        --ag-header-foreground-color: #505050 !important;
+        --ag-header-background-color: #f8f9fa !important;
+        --ag-header-foreground-color: #374151 !important;
         --ag-header-font-weight: 600;
         --ag-row-hover-color: #f8f9fa;
         --ag-selected-row-background-color: rgba(25, 118, 210, 0.1);
         --ag-font-family: sans-serif;
         --ag-font-size: 14px;
-        --ag-cell-horizontal-border: 1px solid #e0e0e0;
-        --ag-header-column-separator-color: #e0e0e0;
+        --ag-cell-horizontal-border: 1px solid #e5e7eb;
+        --ag-header-column-separator-color: #e5e7eb;
         --ag-borders: none;
         --ag-border-radius: 4px;
-        --ag-row-border-color: #f0f0f0;
-        --ag-odd-row-background-color: #f9f9f9 !important;
+        --ag-row-border-color: #e5e7eb;
+        --ag-odd-row-background-color: #ffffff !important;
         --ag-even-row-background-color: #ffffff !important;
         --ag-alpine-active-color: #1976D2;
-        border: 1px solid #e0e0e0;
+        border: 1px solid #e5e7eb;
         border-radius: 4px;
         overflow: hidden;
     }
@@ -420,31 +420,47 @@ def _get_main_css() -> str:
     /* Force consistent cell styling */
     .ag-theme-streamlit .ag-cell {
         color: #333333 !important;
-        background-color: inherit !important;
+        background-color: #ffffff !important;
         user-select: text !important;
         -webkit-user-select: text !important;
         white-space: normal !important;
         line-height: 1.5 !important;
-        padding: 8px 15px !important;
+        padding: 12px 16px !important;
+        border-bottom: 1px solid #e5e7eb !important;
     }
     
     /* Consistent header styling */
     .ag-theme-streamlit .ag-header-cell {
-        background-color: #f0f0f0 !important;
-        color: #505050 !important;
-        font-weight: bold !important;
-        border-bottom: 1px solid #e0e0e0 !important;
+        background-color: #f8f9fa !important;
+        color: #374151 !important;
+        font-weight: 600 !important;
+        border-bottom: 1px solid #e5e7eb !important;
+        padding: 12px 16px !important;
     }
     
     /* Consistent row styling with thin borders */
     .ag-theme-streamlit .ag-row {
-        border-bottom: 1px solid #f0f0f0 !important;
+        background-color: #ffffff !important;
+        border-bottom: 1px solid #f0f2f5 !important;
     }
     
-    /* Question ID and Sub-Question ID styling */
+    /* Question ID and Sub-Question ID styling - subtle gray text */
     .ag-theme-streamlit .ag-cell[col-id="question"],
     .ag-theme-streamlit .ag-cell[col-id="sub_question"] {
-        color: #666666 !important;
+        color: #6b7280 !important;
+        background-color: #ffffff !important;
+    }
+    
+    /* Topic column - very subtle blue tint */
+    .ag-theme-streamlit .ag-cell[col-id="topic"] {
+        background-color: #fafbff !important;
+        color: #333333 !important;
+    }
+    
+    /* Question text column - very subtle green tint */
+    .ag-theme-streamlit .ag-cell[col-id="text"] {
+        background-color: #fafffe !important;
+        color: #333333 !important;
     }
     
     /* Card styling with subtle borders */
@@ -694,10 +710,7 @@ def _get_main_css() -> str:
         border-left: 4px solid #1976D2 !important;
     }
 
-    /* Table/Grid improvements */
-    .ag-theme-streamlit .ag-cell {
-        color: #111111 !important;
-    }
+    /* Table/Grid improvements are handled in the main AgGrid section above */
     </style>
     """
 
@@ -880,35 +893,6 @@ def apply_step_specific_css(step: int) -> None:
         /* Page background - Pure white for maximum contrast */
         .main .block-container {
             background-color: #ffffff !important;
-        }
-        
-        /* AgGrid styling for Step 2 - High contrast */
-        .ag-theme-streamlit {
-            --ag-background-color: #ffffff !important;
-            --ag-foreground-color: #111827 !important;
-            --ag-header-background-color: #f3f4f6 !important;
-            --ag-header-foreground-color: #374151 !important;
-            --ag-row-hover-color: #f9fafb !important;
-            --ag-selected-row-background-color: rgba(30, 64, 175, 0.1) !important;
-            --ag-odd-row-background-color: #f9fafb !important;
-            --ag-even-row-background-color: #ffffff !important;
-            border: 2px solid #e5e7eb !important;
-            border-radius: 8px !important;
-        }
-        
-        .ag-theme-streamlit .ag-cell {
-            color: #111827 !important;
-            border-bottom: 1px solid #e5e7eb !important;
-            padding: 12px 16px !important;
-            font-size: 14px !important;
-        }
-        
-        .ag-theme-streamlit .ag-header-cell {
-            background-color: #f3f4f6 !important;
-            color: #374151 !important;
-            font-weight: 700 !important;
-            border-bottom: 2px solid #d1d5db !important;
-            padding: 12px 16px !important;
         }
         
         /* Custom info box for file processing - Blue theme */
