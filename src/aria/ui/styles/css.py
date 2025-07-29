@@ -116,6 +116,110 @@ def load_sidebar_css() -> None:
         box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
         outline: none !important;
     }
+    
+    /* Fix file uploader readability */
+    [data-testid="stFileUploader"] {
+        background-color: #ffffff !important;
+        border: 2px dashed #d1d5db !important;
+        border-radius: 8px !important;
+        padding: 2rem !important;
+        text-align: center !important;
+    }
+    
+    [data-testid="stFileUploader"] label {
+        color: #374151 !important;
+        font-weight: 500 !important;
+        font-size: 1rem !important;
+        text-align: center !important;
+    }
+    
+    [data-testid="stFileUploader"] .stUploadButton {
+        background-color: #3b82f6 !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 6px !important;
+        padding: 0.75rem 1.5rem !important;
+        font-weight: 500 !important;
+        font-size: 0.875rem !important;
+    }
+    
+    [data-testid="stFileUploader"] .stUploadButton:hover {
+        background-color: #2563eb !important;
+    }
+    
+    /* Fix text input readability */
+    [data-testid="stTextInput"] label {
+        color: #374151 !important;
+        font-weight: 500 !important;
+        font-size: 0.875rem !important;
+        margin-bottom: 0.25rem !important;
+    }
+    
+    [data-testid="stTextInput"] input {
+        background-color: #ffffff !important;
+        color: #1f2937 !important;
+        border: 1px solid #d1d5db !important;
+        border-radius: 4px !important;
+        padding: 0.5rem !important;
+        font-size: 0.875rem !important;
+    }
+    
+    [data-testid="stTextInput"] input:focus {
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
+        outline: none !important;
+    }
+    
+    /* Fix button readability */
+    [data-testid="stButton"] button {
+        background-color: #3b82f6 !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 6px !important;
+        padding: 0.75rem 1.5rem !important;
+        font-weight: 500 !important;
+        font-size: 0.875rem !important;
+    }
+    
+    [data-testid="stButton"] button:hover {
+        background-color: #2563eb !important;
+    }
+    
+    /* Fix all text elements for better contrast */
+    .stMarkdown, .stText, .stMarkdown p, .stMarkdown div {
+        color: #1f2937 !important;
+    }
+    
+    /* Fix error and success messages */
+    .stAlert {
+        border: 1px solid !important;
+        border-radius: 6px !important;
+        padding: 1rem !important;
+    }
+    
+    .stAlert[data-baseweb="notification"] {
+        background-color: #fef2f2 !important;
+        border-color: #fecaca !important;
+        color: #991b1b !important;
+    }
+    
+    .stAlert[data-baseweb="notification"][data-status="success"] {
+        background-color: #f0fdf4 !important;
+        border-color: #bbf7d0 !important;
+        color: #14532d !important;
+    }
+    
+    .stAlert[data-baseweb="notification"][data-status="info"] {
+        background-color: #eff6ff !important;
+        border-color: #bfdbfe !important;
+        color: #1e40af !important;
+    }
+    
+    .stAlert[data-baseweb="notification"][data-status="warning"] {
+        background-color: #fffbeb !important;
+        border-color: #fed7aa !important;
+        color: #92400e !important;
+    }
     </style>
     """
     st.markdown(sidebar_css, unsafe_allow_html=True)
