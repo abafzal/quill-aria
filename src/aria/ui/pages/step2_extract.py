@@ -193,13 +193,13 @@ def _show_processing_status(extraction_method: str, model_name: str, start_time:
     """
     elapsed_time = time.time() - start_time
     
+    # Calculate dots for both cases
+    dots_count = (int(elapsed_time * 2) % 3) + 1
+    dots = "." * dots_count
+    
     if extraction_method == "ai_extraction":
         # Get model display name
         model_display_name = AVAILABLE_CLAUDE_MODELS.get(model_name, model_name)
-        
-        # Simple animated dots (cycle through 1-3 dots)
-        dots_count = (int(elapsed_time * 2) % 3) + 1
-        dots = "." * dots_count
         
         # Show status with timeout info using custom styling and accessibility
         st.markdown(f"""
@@ -220,7 +220,7 @@ def _show_processing_status(extraction_method: str, model_name: str, start_time:
         <div class="processing-status" role="status" aria-live="polite" aria-label="Processing status">
             📊 <strong>Processing CSV content{dots}</strong>
         </div>
-        """.format(dots="." * ((int(elapsed_time * 2) % 3) + 1)), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
 
 def _extract_questions(

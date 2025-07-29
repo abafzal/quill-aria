@@ -55,29 +55,51 @@ def main():
         # Initialize state manager
         state_manager = StateManager()
         
-        # Render header
-        st.title("📊 " + config.domain.app_title)
-        st.markdown("---")
+        # Sidebar navigation
+        st.sidebar.title("📊 QUILL Navigation")
         
-        # Render stepper
-        render_stepper(state_manager.get_current_step())
+        # Navigation options
+        page_options = {
+            "Main Workflow": "main",
+            "💬 Ad-hoc Questions": "chat"
+        }
         
-        # Render main content based on current step
-        current_step = state_manager.get_current_step()
+        selected_page = st.sidebar.selectbox(
+            "Choose a page:",
+            list(page_options.keys()),
+            key="page_navigation"
+        )
         
-        if current_step == ProcessingStep.UPLOAD:
-            render_upload_page(state_manager)
-        elif current_step == ProcessingStep.EXTRACT:
-            render_extract_page(state_manager)
-        elif current_step == ProcessingStep.GENERATE:
-            render_generate_page(state_manager)
-        elif current_step == ProcessingStep.DOWNLOAD:
-            render_download_page(state_manager)
-        else:
-            render_upload_page(state_manager)
+        # Get the selected page
+        current_page = page_options[selected_page]
         
-        # Render ad-hoc questions page
-        render_adhoc_questions_page(state_manager)
+        if current_page == "main":
+            # Render main workflow
+            st.title("📊 " + config.domain.app_title)
+            st.markdown("---")
+            
+            # Render stepper
+            render_stepper(state_manager.get_current_step())
+            
+            # Render main content based on current step
+            current_step = state_manager.get_current_step()
+            
+            if current_step == ProcessingStep.UPLOAD:
+                render_upload_page(state_manager)
+            elif current_step == ProcessingStep.EXTRACT:
+                render_extract_page(state_manager)
+            elif current_step == ProcessingStep.GENERATE:
+                render_generate_page(state_manager)
+            elif current_step == ProcessingStep.DOWNLOAD:
+                render_download_page(state_manager)
+            else:
+                render_upload_page(state_manager)
+        
+        elif current_page == "chat":
+            # Render ad-hoc questions page
+            st.title("💬 Ad-hoc Questions")
+            st.markdown("---")
+            render_adhoc_questions_page(state_manager)
         
     except Exception as e:
         log_error(f"Error in main application: {str(e)}")
