@@ -243,4 +243,7 @@ test_*.py
 tests/output/
 
 # Temporary files
-.cursorrules 
+.cursorrules
+
+.devcontainer
+.DS_Store 
