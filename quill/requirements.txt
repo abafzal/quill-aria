@@ -1,0 +1,32 @@
+# Core dependencies
+streamlit>=1.30.0
+pandas>=2.0.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
+# Databricks integration
+databricks-sdk>=0.20.0
+
+# HTTP and API libraries
+requests>=2.31.0
+tenacity>=8.2.0
+
+# Environment and configuration
+python-dotenv>=1.0.0
+
+# PDF generation
+fpdf2>=2.7.0
+
+# UI components
+streamlit-aggrid>=0.3.4
+
+# FastAPI (if needed for future API endpoints)
+fastapi>=0.100.0
+uvicorn>=0.23.0
+python-multipart>=0.0.6
+
+# Development dependencies (for testing)
+pytest>=7.0.0
+pytest-mock>=3.10.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.0.0 
