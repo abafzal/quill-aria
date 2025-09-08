@@ -196,9 +196,7 @@ temp/
 logs/
 
 # Data files (be careful with this - you might want to keep some data files)
-*.csv
 *.xlsx
-*.json
 *.parquet
 *.pickle
 *.pkl
