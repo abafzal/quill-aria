@@ -1,6 +1,12 @@
-# ARIA: Analyst Relations Intelligent Assistant
+# Quill: Intelligent Financial Assistant (built on ARIA)
 
-ARIA is an AI-powered assistant designed to help analyst relations teams efficiently process and respond to RFP (Request for Proposal) documents.
+ Quill is a GenAI-powered financial assistant designed for portfolio managers, investment strategists, and risk officers in capital markets and investment management. It helps users navigate and act on regulatory, compliance, and market risks by unifying structured and unstructured data, delivering actionable insights, and automating repetitive compliance and research workflows. Quill can ingest documents, extract key questions, and generate high‑quality, contextual answers. Quill is built on the ARIA framework built by Rafi Kurlansik. 
+
+
+## How Quill relates to ARIA
+
+- **Quill**: Financial domain experience, workflows, and UX.
+- **ARIA (platform)**: Shared building blocks including document processing, question extraction, answer generation, state management, and Databricks integration.
 
 ## Quick Start
 
@@ -14,33 +20,34 @@ streamlit run app.py
 
 ## Features
 
-- **Document Upload**: Support for CSV and HTML RFP documents
-- **AI Question Extraction**: Automatically extract and categorize questions from documents
-- **Intelligent Answer Generation**: Generate contextual responses using AI models
-- **Export Options**: Download results in CSV or HTML format
-- **Real-time Processing**: Live progress tracking and status updates
+- **Financial document ingestion**: Upload CSV and HTML sources (e.g., compliance requirements, disclosures, Q&A banks)
+- **AI question extraction**: Identify and categorize questions from uploaded content
+- **Contextual answer generation**: Produce tailored, referenceable responses using LLMs
+- **Real-time progress**: Live status across steps with a guided stepper UI
+- **Export results**: Download answers and datasets as CSV or HTML
+- **Ad‑hoc questions**: Ask standalone questions with optional context
 
 ## Installation
 
 1. Clone the repository
 2. Install dependencies: `pip install -r requirements.txt`
-3. Configure environment variables (see Configuration section)
-4. Start the application: `streamlit run app.py`
+3. Configure environment variables (see Configuration)
+4. Start the app: `streamlit run app.py`
 
 ## Configuration
 
-The application uses environment variables for configuration. Create a `.env` file in the project root:
+Create a `.env` file in the project root (see `env.dev` for examples):
 
 ```bash
-# Databricks Configuration
+# Databricks configuration
 DATABRICKS_HOST=https://your-workspace.cloud.databricks.com
 DATABRICKS_TOKEN=your_personal_access_token
 
-# Model Endpoints
+# Model endpoints
 QUESTION_EXTRACTION_MODEL=databricks-claude-sonnet-4
 ANSWER_GENERATION_MODEL=your_answer_generation_model
 
-# Optional Settings
+# Optional settings
 APP_DEBUG=true
 APP_DEVELOPMENT_MODE=true
 VOLUME_PATH=/tmp/aria_dev/
@@ -48,165 +55,150 @@ VOLUME_PATH=/tmp/aria_dev/
 
 ## Architecture
 
-ARIA follows a modular architecture with clear separation of concerns:
+Quill uses ARIA’s modular architecture with a clear separation of concerns:
 
 ```
 src/aria/
 ├── config/           # Configuration management
-├── core/            # Core utilities (logging, exceptions)
-├── services/        # Business logic services
-├── ui/              # Streamlit UI components
-└── utils/           # Utility functions
+├── core/             # Core utilities (logging, exceptions, types)
+├── services/         # Domain-agnostic AI services
+├── ui/               # Streamlit UI (components, pages, state)
+└── utils/            # Utility functions (reserved/future)
 ```
 
-### Key Components
+### Key components (from ARIA)
 
-- **Document Processor**: Handles file upload and preprocessing
-- **Question Extraction Service**: AI-powered question extraction from documents
-- **Answer Generation Service**: Generates responses using AI models
-- **State Manager**: Manages application state across steps
-- **UI Pages**: Modular Streamlit pages for each processing step
+- **Document Processor** (`services/document_processor.py`): Uploads and preprocesses files
+- **Question Extraction** (`services/question_extraction.py`): AI-powered extraction and grouping
+- **Answer Generation** (`services/answer_generation.py`): LLM-backed response generation
+- **State Manager** (`ui/state_manager.py`): Multi-step state handling
+- **UI Pages** (`ui/pages/*`): Stepwise flows and ad‑hoc Q&A
 
 ## Usage
 
-### Step 1: Upload Document
-- Upload CSV or HTML RFP documents
-- Automatic file validation and preview
+### Step 1: Upload or use sample CSV
+- Upload CSV or use Sample CSV with regulatory questions
 
-### Step 2: Extract Questions
-- AI-powered question extraction
-- Manual review and editing capabilities
-- Topic-based categorization
+### Step 2: Extract questions
+- AI extraction and categorization
+- Manual review and edits
 
-### Step 3: Generate Answers
-- Select questions for answer generation
-- Customize AI prompts
-- Real-time progress tracking
+### Step 3: Generate answers
+- Select questions and customize prompts
+- Real-time generation with progress tracking
 
-### Step 4: Download Results
-- Export in CSV or HTML format
-- Customizable filenames
-- Complete audit trail
+### Step 4: Download
+- Export results in CSV or HTML
 
-## Development
+### Ad‑hoc questions
+- Use the dedicated page for ad-hoc single‑question workflows
 
-### Project Structure
+## Project structure
 
 ```
-aria/
-├── src/aria/                  # Main application package
-│   ├── config/               # Configuration management
+.
+├── app.py
+├── src/aria/
+│   ├── config/
 │   │   ├── __init__.py
-│   │   ├── constants.py      # Application constants
-│   │   └── settings.py       # Settings and environment handling
-│   ├── core/                 # Core utilities
+│   │   └── config.py
+│   ├── core/
 │   │   ├── __init__.py
-│   │   ├── exceptions.py     # Custom exceptions
-│   │   └── logging_config.py # Logging configuration
-│   ├── services/             # Business logic services
+│   │   ├── exceptions.py
+│   │   ├── logging_config.py
+│   │   └── types.py
+│   ├── services/
 │   │   ├── __init__.py
-│   │   ├── answer_generation.py    # AI answer generation
-│   │   ├── document_processor.py   # Document processing
-│   │   └── question_extraction.py  # AI question extraction
-│   ├── ui/                   # Streamlit UI components
+│   │   ├── answer_generation.py
+│   │   ├── document_processor.py
+│   │   └── question_extraction.py
+│   ├── ui/
 │   │   ├── __init__.py
-│   │   ├── components/       # Reusable UI components
+│   │   ├── components/
 │   │   │   ├── __init__.py
-│   │   │   ├── file_preview.py     # File preview widget
-│   │   │   ├── navigation.py       # Navigation components
-│   │   │   └── stepper.py          # Progress stepper
-│   │   ├── pages/            # Individual page implementations
+│   │   │   ├── file_preview.py
+│   │   │   └── stepper.py
+│   │   ├── pages/
 │   │   │   ├── __init__.py
-│   │   │   ├── step1_upload.py     # File upload page
-│   │   │   ├── step2_extract.py    # Question extraction page
-│   │   │   ├── step3_generate.py   # Answer generation page
-│   │   │   └── step4_download.py   # Results download page
-│   │   └── state_manager.py  # Application state management
-│   └── utils/                # Utility functions
-│       ├── __init__.py
-│       ├── file_utils.py     # File handling utilities
-│       └── validation.py    # Input validation
-├── tests/                    # Test suite
-├── docs/                     # Documentation
-├── app.py                    # Main application entry point
-├── requirements.txt          # Python dependencies
-├── pyproject.toml           # Project configuration
-└── README.md                # This file
+│   │   │   ├── adhoc_questions.py
+│   │   │   ├── step1_upload.py
+│   │   │   ├── step2_extract.py
+│   │   │   ├── step3_generate.py
+│   │   │   └── step4_download.py
+│   │   ├── state_manager.py
+│   │   └── styles/
+│   │       ├── __init__.py
+│   │       └── css.py
+│   └── utils/
+│       └── __init__.py
+├── requirements.txt
+├── pyproject.toml
+├── docs/
+├── assets/
+└── tests/
 ```
 
-The modular version uses a custom Python path configuration to import from the `src/aria/` package. This is handled automatically in `app.py`:
+The `app.py` entry point sets up the Streamlit application and imports modules from `src/aria`.
 
-```python
-# Add src directory to Python path for imports
-src_path = Path(__file__).parent / "src"
-if str(src_path) not in sys.path:
-    sys.path.insert(0, str(src_path))
-```
-
-### Running the Application
+## Running the application
 
 ```bash
-# Development mode
+# Development
 streamlit run app.py
 
-# Production mode (with specific port)
+# Specify a port (e.g., for local testing)
 streamlit run app.py --server.port 8501
 ```
 
-### Testing
+## Testing
 
 ```bash
 # Run all tests
 python -m pytest tests/
 
-# Run with coverage
+# Coverage
 python -m pytest tests/ --cov=src/aria --cov-report=html
 ```
 
-### Code Quality
+## Code quality
 
-The project uses several tools for code quality:
-
-- **Ruff**: Fast Python linter and formatter
+- **Ruff**: Fast Python linter/formatter
 - **pytest**: Testing framework
-- **Type hints**: Full type annotation coverage
-- **Docstrings**: Comprehensive documentation
+- **Type hints**: Strong typing across modules
 
 ## Deployment
 
 ### Databricks Apps
 
-For deployment to Databricks Apps, use the provided `app.yaml`:
+Use the provided `app.yaml`:
 
 ```yaml
 command: ['streamlit', 'run', 'app.py']
 ```
 
-### Local Development
+### Local development
 
-1. Set up environment variables in `.env`
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run locally: `streamlit run app.py`
+1. Create `.env`
+2. `pip install -r requirements.txt`
+3. `streamlit run app.py`
 
-## API Integration
+## API integration
 
-ARIA integrates with Databricks Model Serving endpoints:
+Quill (via ARIA) integrates with Databricks Model Serving endpoints:
 
-- **Question Extraction**: Uses Claude Sonnet for intelligent question parsing
-- **Answer Generation**: Configurable model endpoints for response generation
-- **Authentication**: Supports both personal access tokens and service principals
+- **Question extraction**: e.g., Claude Sonnet family
+- **Answer generation**: configurable model endpoint
+- **Authentication**: personal access tokens or service principals
 
 ## Troubleshooting
 
-### Common Issues
+### Common issues
 
-1. **Import Errors**: Ensure the `src` directory is in your Python path
-2. **API Errors**: Verify Databricks credentials and endpoint URLs
-3. **File Upload Issues**: Check file permissions and supported formats
+1. **Imports**: Ensure `src` is discoverable (handled by `app.py`)
+2. **Model serving**: Verify Databricks host/token and endpoint names
+3. **File upload**: Confirm filetype and permissions
 
-### Debug Mode
-
-Enable debug mode for detailed logging:
+### Debug mode
 
 ```bash
 export APP_DEBUG=true
@@ -215,11 +207,11 @@ streamlit run app.py
 
 ## Contributing
 
-1. Follow the modular architecture patterns
-2. Add comprehensive type hints and docstrings
-3. Write tests for new functionality
-4. Update documentation as needed
+1. Align changes with ARIA’s modular architecture
+2. Add type hints and concise docstrings
+3. Include tests for new functionality
+4. Update documentation when behavior changes
 
 ## License
 
-[Add your license information here] 
+[Add your license information here]
